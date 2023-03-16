@@ -1,0 +1,117 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  color: white;
+  width: 500px;
+  border-radius: 30px;
+  padding: 40px;
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,116,1) 35%, rgba(0,212,255,1) 100%);
+  position: relative;
+}
+
+.wrapper .result {
+  text-align: center;
+}
+
+.wrapper .result button {
+  font-weight: bold;
+  font-family: "Nunito", sans-serif;
+  border-radius: 30px;
+  border: 0;
+  padding: 15px 30px;
+  font-size: 20px;
+  background-color: #f00067;
+  color: #fff;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.wrapper .result h2 {
+  margin-bottom: 0;
+}
+
+.wrapper .result img {
+  width: 150px;
+}
+
+.wrapper .progress {
+  height: 10px;
+  border-radius: 30px;
+  background-color: #e8e8e8;
+  margin-bottom: 25px;
+}
+
+.wrapper .progress__inner {
+  height: 100%;
+  border-radius: 30px;
+  width: 80%;
+  background: #12e730;
+  transition: all 0.3s ease-in-out;
+  background: linear-gradient(90deg, #12e730 0%, #00d4ff 100%);
+}
+
+.wrapper:before,
+.wrapper:after {
+  content: "";
+  display: block;
+  height: 50px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.wrapper:before {
+  width: 95%;
+  bottom: -10px;
+  z-index: 0;
+}
+
+.wrapper:after {
+  width: 90%;
+  bottom: -20px;
+  z-index: 1;
+}
+
+.wrapper h1 {
+  margin: 30px auto;
+  font-size: 2rem;
+}
+
+.wrapper ul {
+  list-style: none;
+  padding: 0;
+}
+
+.wrapper ul li {
+  padding: 15px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.wrapper ul li:hover {
+  font-size: 20px;
+  font-weight: bold;
+  border: 2px solid #dcf5f4;
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(220,245,244,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+.modalTitle {
+  margin-bottom: 50px;
+}
+
+.startModal {
+  margin-bottom: 20px;
+  font-size: 30px;
+  letter-spacing: 3px;
+  border-radius: 20px;
+}

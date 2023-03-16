@@ -1,0 +1,34 @@
+.timer {
+  margin: 0;
+  width: 100%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+  margin: 50px auto;
+  gap: 10px;
+}
+
+.btn-play {
+  width: 100%;
+  padding: 10px 3px;
+  border: 1px solid green;
+  color: green;
+}
+
+.btn-pause {
+  width: 100%;
+  padding: 10px 3px;
+  border: 1px solid gold;
+  color: gold;
+}
+
+.btn-stop {
+  width: 100%;
+  padding: 10px 3px;
+  border: 1px solid red;
+  color: red;
+}
