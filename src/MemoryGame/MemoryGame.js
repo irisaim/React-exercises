@@ -3,195 +3,262 @@ import "./memoryGame.css";
 import Modal from "react-modal";
 
 
-function shuffle(array) {
-    for(let i = array.length - 1; i > 0; i--){
-       const j = Math.floor(Math.random() * i)
-       const temp = array[i]
-       array[i] = array[j]
-       array[j] = temp
-    }
-    return array
-}
 
-const Navbar = ({onNewGame}) => {
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      borderRadius: "20px",
-      transform: "translate(-50%, -50%)",
-      backgroundImage: "url(https://thumbs.dreamstime.com/z/beautiful-flower-arches-walkway-ornamental-plants-garden-chiang-rai-asian-festival-thailand-51957332.jpg)",
-      justifyContent: "center",
-      height: "50vh",
-      width: "500px"
-    },
-  };
 
-    let subtitle;
-    const [modalIsOpen, setIsOpen] = React.useState(true);
+    // let subtitle;
+    // const [modalIsOpen, setIsOpen] = React.useState(true);
   
-    function openModal() {
-      setIsOpen(true);
-    }
+    // function openModal() {
+    //   setIsOpen(true);
+    // }
   
-    function closeModal() {
-      setIsOpen(false);
-    }
+    // function closeModal() {
+    //   setIsOpen(false);
+    // }
   
-    return (
-      <div>
-      <Modal
-                isOpen={modalIsOpen}
-                onRequestClose={closeModal}
-                style={customStyles}
-              >
-                <form>
-                  <h2 className="modalTitle" ref={(_subtitle) => (subtitle = _subtitle)}>Memory Game</h2>
-                  <button onClick={closeModal} className="Start">Start</button>
-                  <button onClick={closeModal} className="Score">Score</button>
-                  <button onClick={closeModal} className="About">About</button>
-                </form>
-              </Modal>
-      <header>
-        <h2>
-          <a>Memory Game</a>
-        </h2>
-        <nav>
-          <li>
-            <a onClick={onNewGame}>Restart</a>
-          </li>
-        </nav>
-      </header>
-      </div>
-    )
-}
+    // return (
+    //   <div>
+    //   <Modal
+    //             isOpen={modalIsOpen}
+    //             onRequestClose={closeModal}
+    //             style={customStyles}
+    //           >
+    //             <form>
+    //               <h2 className="modalTitle" ref={(_subtitle) => (subtitle = _subtitle)}>Memory Game</h2>
+    //               <button onClick={closeModal} className="Start">Start</button>
+    //               <button onClick={closeModal} className="Score">Score</button>
+    //               <button onClick={closeModal} className="About">About</button>
+    //             </form>
+    //           </Modal>
 
-const Card = ({bgImage, showing, onClick}) => {
-  const style = {
-    width: '10%',
-    minWidth: '100px',
-    height: '130px',
-    margin: '20px 55px',
-    display: 'inline-block',
-    background: 'radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(241,166,13,0.5550595238095238) 52%, rgba(0,212,255,1) 100%)',
-    border: '5px solid grey',
-    borderRadius: '20px',
-    backgroundImage: '100%',
-    textAlign: 'center',
-  }
+      
+    //   </div>
+    // );
   
-  if (showing) {
-    style.backgroundImage = bgImage
-  }
-  
-  return <div onClick={onClick} style={style}></div>
-}
-
-const CardState = {
-   HIDING: 0,   
-   SHOWING: 1,  
-   MATCHING: 2  
-}
-
-class MemoryGame extends React.Component {
-  constructor(props) {
-    super(props)
-    
-   let cards = [
-      {id: 0,  cardState: CardState.HIDING, backgroundImage: 'url(https://www.proflowers.com/blog/wp-content/plugins/pf-flowertypes/image/flower-197343.jpg'},
-      {id: 1,  cardState: CardState.HIDING, backgroundImage: 'url(https://www.proflowers.com/blog/wp-content/plugins/pf-flowertypes/image/flower-197343.jpg'},
-      {id: 2,  cardState: CardState.HIDING, backgroundImage: 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKZoTcGFaH1vzbTe86xjkkerh2F0QlJTDH_g&usqp=CAU)'},
-      {id: 3,  cardState: CardState.HIDING, backgroundImage: 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKZoTcGFaH1vzbTe86xjkkerh2F0QlJTDH_g&usqp=CAU)'},
-      {id: 4,  cardState: CardState.HIDING, backgroundImage: 'url(https://stylesatlife.com/wp-content/uploads/2020/02/Jasmine-flower-types.jpg)'},
-      {id: 5,  cardState: CardState.HIDING, backgroundImage: 'url(https://stylesatlife.com/wp-content/uploads/2020/02/Jasmine-flower-types.jpg)'},
-      {id: 6,  cardState: CardState.HIDING, backgroundImage: 'url(https://thegardeningdad.com/wp-content/uploads/2020/11/common-daisies.jpg'},
-      {id: 7,  cardState: CardState.HIDING, backgroundImage: 'url(https://thegardeningdad.com/wp-content/uploads/2020/11/common-daisies.jpg'},
-      {id: 8,  cardState: CardState.HIDING, backgroundImage: 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGVnhApZLbqffH38HIrMc-DfoAID76xLeyiFZNY7CjrG021pjf0sLDJtWE4GHoGfxhtWk&usqp=CAU)'},
-      {id: 9,  cardState: CardState.HIDING, backgroundImage: 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGVnhApZLbqffH38HIrMc-DfoAID76xLeyiFZNY7CjrG021pjf0sLDJtWE4GHoGfxhtWk&usqp=CAU)'},
-      {id: 10, cardState: CardState.HIDING, backgroundImage: 'url(https://yourgardenbuddy.com/wp-content/uploads/2020/12/Winter-Flowers.jpg)'},
-      {id: 11, cardState: CardState.HIDING, backgroundImage: 'url(https://yourgardenbuddy.com/wp-content/uploads/2020/12/Winter-Flowers.jpg)'},
-      {id: 12, cardState: CardState.HIDING, backgroundImage: 'url(https://www.signaturetownhousehydepark.co.uk/blog/wp-content/uploads/2022/06/8-Places-to-See-Beautiful-Roses-in-Bloom-in-London.jpg)'},
-      {id: 13, cardState: CardState.HIDING, backgroundImage: 'url(https://www.signaturetownhousehydepark.co.uk/blog/wp-content/uploads/2022/06/8-Places-to-See-Beautiful-Roses-in-Bloom-in-London.jpg)'},
-      {id: 14, cardState: CardState.HIDING, backgroundImage: 'url(https://as1.ftcdn.net/v2/jpg/02/32/84/90/1000_F_232849052_aa6FM38JHCp4bLKXg5251pUNFZF3Puvq.jpg)'},
-      {id: 15, cardState: CardState.HIDING, backgroundImage: 'url(https://as1.ftcdn.net/v2/jpg/02/32/84/90/1000_F_232849052_aa6FM38JHCp4bLKXg5251pUNFZF3Puvq.jpg)'}
+    const pairsList = [
+      {id: 0,  backgroundImage: 'url(https://www.proflowers.com/blog/wp-content/plugins/pf-flowertypes/image/flower-197343.jpg'},
+      {id: 1,  backgroundImage: 'url(https://www.proflowers.com/blog/wp-content/plugins/pf-flowertypes/image/flower-197343.jpg'},
+      {id: 2,   backgroundImage: 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKZoTcGFaH1vzbTe86xjkkerh2F0QlJTDH_g&usqp=CAU)'},
+      {id: 3,   backgroundImage: 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKZoTcGFaH1vzbTe86xjkkerh2F0QlJTDH_g&usqp=CAU)'},
+      {id: 4,   backgroundImage: 'url(https://stylesatlife.com/wp-content/uploads/2020/02/Jasmine-flower-types.jpg)'},
+      {id: 5,   backgroundImage: 'url(https://stylesatlife.com/wp-content/uploads/2020/02/Jasmine-flower-types.jpg)'},
+      {id: 6,   backgroundImage: 'url(https://thegardeningdad.com/wp-content/uploads/2020/11/common-daisies.jpg'},
+      {id: 7,   backgroundImage: 'url(https://thegardeningdad.com/wp-content/uploads/2020/11/common-daisies.jpg'},
+      {id: 8,   backgroundImage: 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGVnhApZLbqffH38HIrMc-DfoAID76xLeyiFZNY7CjrG021pjf0sLDJtWE4GHoGfxhtWk&usqp=CAU)'},
+      {id: 9,   backgroundImage: 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGVnhApZLbqffH38HIrMc-DfoAID76xLeyiFZNY7CjrG021pjf0sLDJtWE4GHoGfxhtWk&usqp=CAU)'},
+      {id: 10,  backgroundImage: 'url(https://yourgardenbuddy.com/wp-content/uploads/2020/12/Winter-Flowers.jpg)'},
+      {id: 11,  backgroundImage: 'url(https://yourgardenbuddy.com/wp-content/uploads/2020/12/Winter-Flowers.jpg)'},
+      {id: 12,  backgroundImage: 'url(https://www.signaturetownhousehydepark.co.uk/blog/wp-content/uploads/2022/06/8-Places-to-See-Beautiful-Roses-in-Bloom-in-London.jpg)'},
+      {id: 13,  backgroundImage: 'url(https://www.signaturetownhousehydepark.co.uk/blog/wp-content/uploads/2022/06/8-Places-to-See-Beautiful-Roses-in-Bloom-in-London.jpg)'},
+      {id: 14,  backgroundImage: 'url(https://as1.ftcdn.net/v2/jpg/02/32/84/90/1000_F_232849052_aa6FM38JHCp4bLKXg5251pUNFZF3Puvq.jpg)'},
+      {id: 15,  backgroundImage: 'url(https://as1.ftcdn.net/v2/jpg/02/32/84/90/1000_F_232849052_aa6FM38JHCp4bLKXg5251pUNFZF3Puvq.jpg)'}
     ]; 
     
-    // SHUFFLE CARDS
-    cards = shuffle(cards)
-    this.state = { cards, noClick: false } 
-  }
-  
-  handleNewGame = () => {
-    let cards = this.state.cards.map(c => ({
-      ...c,
-      cardState: CardState.HIDING
-    }))
-    cards = shuffle(cards)
-    this.setState({cards})
-  }
-  
-  handleClick = (id) => {
-    
-    const mapCardState = (cards, idsToChange, newCardState) => {
-      return cards.map(c => {
-        if (idsToChange.includes(c.id)) {
-          return {
-            ...c,
-            cardState: newCardState
+    class MemoryGame extends React.Component {
+      constructor(props) {
+        super(props)
+        this.state = this.getNewGame();
+        //this.onSelectedCard = this.onSelectedCard.bind(this);
+      };
+      
+      getNewGame() {
+        return {
+          game: this.shuffleCards(),
+          firstCard: null,
+          secondCard: null,
+        };
+      };
+      shuffleCards() {
+        var cards = [];
+        for (var i = 0; i < (pairsList.length); i++) {
+          var card = JSON.parse(JSON.stringify(pairsList[i]));
+          card.id = i;
+          card.visible = false;
+          card.matched = false;
+          cards.push(card);
+          var pairedCard = JSON.parse(JSON.stringify(card));
+          //this way of clone might not work if the object contains functions
+          pairedCard.id = i + pairsList.length;
+          cards.push(pairedCard);;
+        }
+        return this.shuffleArray(cards);
+      };
+      shuffleArray(o) {
+        for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+        return o;
+      };
+      onResetGame() {
+        var newState = this.getNewGame();
+        this.setState(newState);
+      }
+      onSelectedCard(card) {
+        //console.log(this, card);
+        var cards = this.state.game.slice();
+        var firstCard = this.state.firstCard;
+        var secondCard = this.state.secondCard;
+        //if the card is visible ignore the click
+        if (card.visible) {
+          return;
+        }
+        //console.log(cards, cards.indexOf(card));
+        //make selected card visible
+        cards[cards.indexOf(card)].visible = true;
+        //console.log(firstCard, secondCard);
+        //if second card is set then reset the selectedCards
+        if (this.state.secondCard) {
+          cards[cards.indexOf(firstCard)].visible = false;
+          cards[cards.indexOf(secondCard)].visible = false;
+          secondCard = null;
+          firstCard = null;
+        }
+        if (!firstCard) {
+          //set this card as first card
+          firstCard = card;
+          //and wait for second card to be selected.
+        } else {
+          //second card seleted
+          secondCard = card;
+          if (firstCard.backgroundImage == secondCard.backgroundImage) {
+            //is a match
+            cards[cards.indexOf(firstCard)].matched = true;
+            cards[cards.indexOf(secondCard)].matched = true;
+            firstCard = null;
+            secondCard = null;
+          } else {
+            //didnt match. wait for next click
           }
         }
-        return c
-      })
-    }
-
-    const foundCard = this.state.cards.find(c => c.id === id)
-    if (this.state.noClick || foundCard.cardState !== CardState.HIDING) {
-      return
-    }
-    
-    let noClick = false
-    let cards = mapCardState(this.state.cards, [id], CardState.SHOWING)
-    const showingCards = cards.filter((c) => c.cardState === CardState.SHOWING)
-    
-    const ids = showingCards.map((c) => c.id)
-    if (showingCards.length === 2 &&
-       showingCards[0].backgroundColor === showingCards[1].backgroundColor) {
-      cards = mapCardState(cards, ids, CardState.MATCHING)
-    } else if (showingCards.length === 2) {
-      let hidingCards = mapCardState(cards, ids, CardState.HIDING)
       
-      noClick = true     
+        this.setState({
+          game: cards,
+          firstCard: firstCard,
+          secondCard: secondCard
+        });
+      };
+      render() {
+        var status;
+        if (this.state.game.filter(function(val) {
+            return !val.matched;
+          }).length == 0) {
+          status = "COMPLETED";
+        }
+        return (
+          <div>
+            <header className="page-header row">
+              <h1>Numeric Memory</h1>
+            </header>
+            <div id="game-extras" className="row">
+              <StatsComponent game={ this.state.game } />
+              <OptionsComponent onResetGame={() => this.onResetGame()} />
+            </div>
+            <BoardComponent game={ this.state.game } onSelectedCard={(card) => this.onSelectedCard(card)} />
+            <StatusComponent status={status} />
+          </div>
+        );
+      }
+      };
       
-      this.setState({cards, noClick}, () => {
-        setTimeout(() => {
-          this.setState({cards: hidingCards, noClick: false})
-        }, 1300)
-      })
-      return
-    }
-    
-    this.setState({cards, noClick})
-  }
-
-  render() {
-    const cards = this.state.cards.map(card => (
-      <Card 
-        key={card.id} 
-        showing={card.cardState !== CardState.HIDING} 
-        bgImage={card.backgroundImage} 
-        onClick={()=> this.handleClick(card.id)}  
-      />)
+      class StatsComponent extends React.Component {
+      render() {
+        var totalPairs = this.props.game.length / 2;
+        var matchedPairs = this.props.game.filter((val) => {
+          return val.matched;
+        }).length / 2;
+        return (
+          <section className="col-xs-8 text-left game-stats">
+          <b>Matched Pairs</b> <meter value={matchedPairs} min="0" max={totalPairs}></meter> {matchedPairs}/{totalPairs}
+        </section>
+        );
+      }
+      };
       
-    )
-                                       
-    return <div>
-              <Navbar onNewGame={this.handleNewGame} />
-              {cards}
-           </div>
-  }
-}
-
+      class OptionsComponent extends React.Component {
+      render() {
+        return (
+          <aside className="col-xs-4 text-right game-options">
+          <button className="btn btn-xs btn-success" onClick={() => this.props.onResetGame()}>
+            <span className="glyphicon glyphicon-refresh" aria-hidden="true">   </span>  RESTART</button>
+         </aside>
+        );
+      }
+      };
+      
+      class BoardComponent extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          cards: props.game
+        };
+      };
+      componentWillReceiveProps(nextProps){
+        this.setState({cards: nextProps.game});
+      };
+      cardUp(card) {
+      
+        //this.props.onSelectedCard(card);
+      };
+      render() {
+        var board = this;
+        var cards = this.state.cards.map(function(card) {
+          return <CardComponent id={card.id} key={card.id} card={card} 
+                   onSelectedCard={board.props.onSelectedCard.bind(this, card)} />;
+        });
+        return (
+          <section id="game-board" className="row">
+            {cards}
+          </section>
+        );
+      };
+      };
+      
+      class CardComponent extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          card: props.card
+        };
+      };
+      turnUpCard() {
+        var card = this.state.card;
+        this.props.onSelectedCard(card);
+      };
+      render() {
+        //console.log("card details", this.props.card);
+        var card = this.props.card;
+        var cardContent;
+        var cardClasses = "card";
+        if (card.visible) {
+          cardContent = <span className="card-content">{ card.backgroundImage }</span>;
+          if (!card.matched) {
+            cardClasses += " card-selected";
+          } else {
+            cardClasses += " card-visible";
+          }
+        }
+        return (
+          <div className="g-col-6">
+            <div className={cardClasses} onClick={() => this.props.onSelectedCard()}>
+              {cardContent}
+            </div>
+          </div>
+        );
+      };
+      }
+      
+      class StatusComponent extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {};
+      }
+      render() {
+        if (this.props.status !== "COMPLETED") {
+          return null;
+        }
+        return (
+          <div>
+            <h2>Congratulations!</h2>
+          </div>
+        );
+      }
+      };
 export default MemoryGame

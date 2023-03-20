@@ -14,11 +14,12 @@ const Btn = ({name, appearance}) => {
 	);
 }
 function Time() {
+	
 	const [selectedTime, setSelectedTime] = useState(new Date());
 	const [time, setTime] = useState(new Date());
-  
 	const Time = ()=>{
 	  TimeAgo.addLocale(en);
+	  
   
 	  const timeAgo = new TimeAgo("en-US");
 	  const inSeconds = new Date(time).getTime();
@@ -35,7 +36,7 @@ function Time() {
 	return (
 	  <div style={{textAlign:"center",marginTop:"0px"}}>
 		<input type="datetime-local"  onChange={onChangeTime}  min="2018-06-07T00:00" max={new Date()}/>
-		<Time/>
+
 	  </div>
 	)
   }
@@ -55,13 +56,7 @@ const ReminderForm = ({addReminder}) => {
 				ref={node => { input = node }}
 				placeholder="add a task"
 			/>
-			<Time />
-			  {/* <div style={{textAlign:"center",marginTop:"0px"}}>
-      <input type="datetime-local"  min="2018-06-07T00:00" max={new Date()}/>
-      
-    </div> */}
 			<Btn name="Add Reminder" appearance="primary"/>
-			{/* <Time /> */}
 		</form>
 	);
 };
@@ -72,8 +67,8 @@ const ReminderItem = ({item, minutesAgo, remove}) => {
 		<li className="remind-list">
 			<div className="input-container">
 				<p className="note">{item.text}</p>
-				<p time={minutesAgo}></p>
 			</div>
+			<p>{minutesAgo}</p>
 			<p className='remove-btn' onClick={() => {
 				remove(item.id)		
 			}}>Remove</p>
@@ -81,14 +76,12 @@ const ReminderItem = ({item, minutesAgo, remove}) => {
 	);
 };
 
-const ReminderList = ({items, minutesAgo, remove}) => {
-	const reminderNode = items.map((item) => {
-		
-		return <ReminderItem item={item}  time={minutesAgo}  remove={remove} key={item.id}/>
+const ReminderList = ({items, timeAgo, remove}) => {
+	const reminderNode = items.map((item, timeAgo) => {
+		return <ReminderItem item={item} timeAgo={timeAgo} remove={remove} key={item.id}/>
 	});
 	return (
-		<ul>{[reminderNode, minutesAgo]}</ul>
-		
+		<ul>{reminderNode}</ul>
 	);
 }
 
@@ -118,7 +111,7 @@ class Reminder extends React.Component {
 			<div className='reminderApp'>
 			<div className="reminder">
 				<h1 className='reminders-status'>{this.state.data.length} Reminders</h1>
-				{/* <Time time={this.state.time}/> */}
+				<Time time={this.state.time}/>
 				<ReminderList 
 					items={this.state.data}
 					remove={this.handleRemove.bind(this)}

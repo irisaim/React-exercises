@@ -1,0 +1,113 @@
+/* $primary-color: rgb(92, 164, 63);
+$primary-color-dark: darken($primary-color, 15%);
+$primary-color-light: lighten($primary-color, 45%);
+$secondary-color: yellow;
+$secondary-color-light: lighten($secondary-color, 20%);
+
+body {
+  background: $primary-color-light;
+  text-align: center;
+}
+
+//Set background image with opacity
+body:before{
+    content: ' ';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.2;
+    background-image:  url('https://tasknotes.files.wordpress.com/2016/12/texture-numbers-xs.png');
+  } */
+
+#project-note {
+  margin: 0px;
+}
+
+.page-header {
+  background-color: black;  
+  color:white;
+  margin: 0px;
+}
+  
+  h1 {
+    margin-top: 0px;
+    padding-top: 20px;
+  }
+
+
+#game-extras {
+  background: yellowgreen;
+  color: darkblue;
+  padding: 5px 5px;
+}
+  
+  .game-stats > meter {
+    font-size:large;
+  }
+
+
+ 
+  .card {
+    background-color:pink;
+    width: 100%;
+    margin: 10px 0px;
+    padding: 10px;
+  } 
+
+ .card-content {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      font-size: 24px;
+      display: none;
+      background: grey;
+      opacity: 0.7;
+      border: 1px solid blue;
+    }
+    .card-selected {
+      border: 2px solid gold;
+      color: red;
+    }
+  .card-visible .card-content,
+    .card-selected .card-content {
+      display: block;
+    }
+  
+#game-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+#game-completed {
+  color:purple;
+  font-size: 48px;
+}
+
+
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+/* //////////////// Media Queries ////////////////
+
+// XS - Extra small devices - Smartphones
+@media(max-width:767px){
+  .card { height:60px; font-size:24px; }
+}
+// SM - Small Devices - Tablets
+@media(min-width:768px){
+  .card { height:80px; font-size:36px; }
+}
+// MD - Medium Devices - laptops
+@media(min-width:992px){
+  .card { height:120px; font-size:64px; }
+}
+// LG - Large devices
+@media(min-width:1200px){
+  .card { height:150px;font-size:72px; }
+} */

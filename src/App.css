@@ -1,1 +1,70 @@
+.App {
 
+}
+
+.appTitle {
+    text-align: center;
+    color: black;
+}
+
+/* .appList {
+    text-decoration: none;
+}
+
+.appList li {
+    border: 1px solid black;
+    padding: 10px 4px;
+    width: 150px;
+  
+} */
+
+
+
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+    /* background-color: #bbb; */
+    line-height: 1.5;
+}
+
+.dl-blurbs {
+	display: grid;
+    float: left;
+    width: 50%;
+	}
+
+dl {
+  counter-reset: count;
+
+	padding-left: 4vw; 
+	padding-right: 4vw;
+	margin: 0;
+}
+
+dl + dl {
+	counter-reset: counter 4;
+}
+dt {
+  counter-increment: count;
+	color: black;
+	font-size: 50px;
+	text-transform: uppercase;
+}
+dt::before {
+  content: counter(count, decimal-leading-zero)".";
+
+	color: black;
+	margin-left: -1vw;
+	padding-right: 12px;
+}
+
+dd {
+	margin-left: 5vw;
+	margin-bottom: 2vh;
+}
